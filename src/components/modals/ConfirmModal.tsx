@@ -16,17 +16,17 @@ export const ConfirmModal = (props: Props) => {
             }}
             appElement={document.getElementById("root") || undefined}
           >
-            <div className="flex flex-col items-center m-8">
-              <p className="text-3xl text-black">정답 확인</p>
-              <div className="flex my-4">
+            <div className="flex flex-col items-center m-6">
+              <p className="text-2xl text-black">정답 확인</p>
+              <div className="flex mt-4">
                 <div className="flex flex-col items-center">
-                  <p className="text-xl text-black text-center">선택하신 정답이</p>
-                  <div className="w-full border-2 border-solid border-black rounded-lg my-4 py-4">
+                  <p className="text-lg text-black text-center">선택하신 정답이</p>
+                  <div className="w-full border-2 border-solid border-black rounded-lg my-2 py-2">
                     <p className="text-center text-black w-full px-8">
                       Lorem ipsum dolor sit amet.
                     </p>
                   </div>
-                  <p className="text-xl text-black text-center">맞습니까?</p>
+                  <p className="text-lg text-black text-center">맞습니까?</p>
                   <div className="w-1/3 border-2 border-solid border-black rounded-lg my-4 py-2 bg-purple-300">
                     <p className="text-center text-black w-full px-4"
                     onClick={() => {
