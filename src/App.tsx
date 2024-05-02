@@ -10,6 +10,7 @@ import { Question } from "./components/quiz/Question";
 function App() {
   const [isStatisicModal, setStatisticModal] = useState<boolean>(false);
   const [isConfirmModal, setConfirmModal] = useState<boolean>(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<number>(-1);
   const sampleQuestion =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\
   eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad\
@@ -19,6 +20,16 @@ function App() {
   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in\
   culpa qui officia deserunt mollit anim id est laborum.";
   const sampleAnswer = "Lorem ipsum dolor sit amet.";
+
+  const selectAnswer = (order: number) => {
+    if (selectedAnswer === -1) {
+      setSelectedAnswer(order);
+    } else if(selectedAnswer === order){
+      setSelectedAnswer(-1);
+    } else{
+      setSelectedAnswer(order)
+    }
+  };
 
   return (
     <div className="w-[480px] h-screen bg-gray-100">
@@ -43,29 +54,58 @@ function App() {
       <body className="flex flex-col h-auto p-4">
         <Question text={sampleQuestion} />
         <div className="w-full h-auto pt-16">
-          <Answer text={sampleAnswer} setOpen={setConfirmModal} />
-          <Answer text={sampleAnswer} setOpen={setConfirmModal} />
-          <Answer text={sampleAnswer} setOpen={setConfirmModal} />
-          <Answer text={sampleAnswer} setOpen={setConfirmModal} />
-        </div>
-
-        {/* 통계 모달 */}
-        {isStatisicModal ? (
-          <StatisticModal
-            isOpen={isStatisicModal}
-            setOpen={setStatisticModal}
+          <Answer
+            text={sampleAnswer}
+            setOpen={() => {
+              selectAnswer(0);
+            }}
+            isSelected={selectedAnswer == 0}
           />
-        ) : (
-          <></>
-        )}
-
-        {/* 확인 모달 */}
-        {isConfirmModal ? (
-          <ConfirmModal isOpen={isConfirmModal} setOpen={setConfirmModal} />
+          <Answer
+            text={sampleAnswer}
+            setOpen={() => {
+              selectAnswer(1);
+            }}
+            isSelected={selectedAnswer === 1}
+          />
+          <Answer
+            text={sampleAnswer}
+            setOpen={() => {
+              selectAnswer(2);
+            }}
+            isSelected={selectedAnswer === 2}
+          />
+          <Answer
+            text={sampleAnswer}
+            setOpen={() => {
+              selectAnswer(3);
+            }}
+            isSelected={selectedAnswer === 3}
+          />
+        </div>
+        {/** 정답 확인 */}
+        {selectedAnswer !== -1 ? (
+          <div className={"border-2 border-solid border-black rounded-lg my-4 py-4 px-8"} onClick={() => {setConfirmModal(true)}}>
+            <p>확인</p>
+          </div>
         ) : (
           <></>
         )}
       </body>
+
+      {/* 통계 모달 */}
+      {isStatisicModal ? (
+        <StatisticModal isOpen={isStatisicModal} setOpen={setStatisticModal} />
+      ) : (
+        <></>
+      )}
+
+      {/* 확인 모달 */}
+      {isConfirmModal ? (
+        <ConfirmModal isOpen={isConfirmModal} setOpen={setConfirmModal} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
